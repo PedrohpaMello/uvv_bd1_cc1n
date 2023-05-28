@@ -1,49 +1,56 @@
+-- PSET1 
+-- ALUNO: PEDRO HENRIQUE PIMENTEL MELLO DE ALMEIDA
+-- MATRÍCULA: 202305632
 
+-- COMANDO PARA REMOVER O BANCO DE DADOS SE ELE JA EXISTIR
+DROP DATABASE  IF EXISTS uvv;
 
+-- COMANDO PARA REMOVER O USUÁRIO SE ELE JA EXISTIR
+DROP USER IF EXISTS pedro mello;
+
+-- COMANDO PARA CRIAR O USUÁRIO
 CREATE USER 
 		pedromello WITH ENCRYPTED PASSWORD 'senha'
 		CREATEDB
 		CREATEROLE
 		LOGIN;
-			
-			
-DROP DATABASE  IF EXISTS uvv;
 
---COMANDO PARA CRIAÇÃO DO BANCO DE DADOS UVV
+--COMANDO PARA CRIAR O BANCO DE DADOS
 CREATE DATABASE uvv WITH 
 
-				OWNER 				= pedromello
-				TEMPLATE 			= template0 
-				ENCODING 			= 'UTF8'  
-				LC_COLLATE 			= 'pt_BR.UTF-8' 
-				LC_CTYPE 			= 'pt_BR.UTF-8'  
-				ALLOW_CONNECTIONS	= TRUE; 
+		OWNER 			= pedromello
+		TEMPLATE 		= template0 
+		ENCODING 		= 'UTF8'  
+		LC_COLLATE 		= 'pt_BR.UTF-8' 
+		LC_CTYPE 		= 'pt_BR.UTF-8'  
+		ALLOW_CONNECTIONS	= TRUE; 
             
--- COMANDO PARA SE CONECTAR AO BANCO DE DADOS UVV  	
+--COMANDO PARA SE CONECTAR AO BANCO DE DADOS
 \c 'dbname=uvv user=pedromello password=senha'	
           
--- COMANDO DE CRIAR SCHEMA
+--COMANDO QUE CRIA O SCHEMA LOJAS 
 CREATE SCHEMA Lojas
 AUTHORIZATION pedromello;
 
+--COMANDO QUE DEFINE O SCHEMA PADRÁO PARA O USUÁRIO
 ALTER USER pedromello
 SET SEARCH_PATH TO lojas, "$user", public;
-
+          
 
 -- COMANDO PARA CRIAÇÃO DA TABELA PRODUTOS
 CREATE TABLE produtos (
 
-  				produto_id						NUMERIC(38)	NOT NULL,
-  				nome							VARCHAR(255)	NOT NULL,
-  				preco_unitario					NUMERIC(10,2),
-  				detalhes						BYTEA,
-  				imagem							BYTEA,
-  				imagem_mime_type				VARCHAR(512),
-  				imagem_arquivo					VARCHAR(512),
-  				imagem_charset					VARCHAR(512),
-  				imagem_ultima_atualizacao		DATE,
+  	     produto_id				NUMERIC(38)	NOT NULL,
+  	     nome				VARCHAR(255)	NOT NULL,
+  	     preco_unitario			NUMERIC(10,2),
+  	     detalhes				BYTEA,
+  	     imagem				BYTEA,
+             imagem_mime_type			VARCHAR(512),
+  	     imagem_arquivo			VARCHAR(512),
+  	     imagem_charset			VARCHAR(512),
+  	     imagem_ultima_atualizacao		DATE,
   					
-  					CONSTRAINT pk_produtos PRIMARY KEY (produto_id)
+  	         CONSTRAINT pk_produtos PRIMARY KEY (produto_id)
 );
 
 
@@ -63,17 +70,17 @@ COMMENT ON COLUMN produtos.imagem_ultima_atualizacao IS 'data da última atualiz
 -- COMANDO PARA A CRIAÇÃO DA TABELA LOJAS
 CREATE TABLE Lojas (
 
-             loja_id      				NUMERIC(38) 	NOT NULL,
-             nome 	     				VARCHAR(255) 	NOT NULL,
-             endereco_web 				VARCHAR(100),
+             loja_id      			NUMERIC(38) 	NOT NULL,
+             nome 	     			VARCHAR(255) 	NOT NULL,
+             endereco_web 			VARCHAR(100),
              endereco_fisico 			VARCHAR(512),
-             latitude 					NUMERIC,
-             longitude 					NUMERIC,
-             logo 						BYTEA,
+             latitude 				NUMERIC,
+             longitude 				NUMERIC,
+             logo 				BYTEA,
              logo_mime_type  			VARCHAR(512),
-             logo_arquivo   				VARCHAR,
+             logo_arquivo   			VARCHAR,
              logo_charset    			VARCHAR(512),
-             logo_ultima_atualizacao 	DATE,
+             logo_ultima_atualizacao 		DATE,
 
                 CONSTRAINT pk_lojas PRIMARY KEY (loja_id)
 );
@@ -94,10 +101,10 @@ COMMENT ON COLUMN Lojas.logo_ultima_atualizacao IS 'data da última atualizaçã
 
 -- COMANDO DE CRIAÇÃO DA TABELA ESTOQUES
 CREATE TABLE estoques (
-             estoque_id 				NUMERIC(38) NOT NULL,
-             loja_id 					NUMERIC(38) NOT NULL,
-             produto_id 				NUMERIC(38) NOT NULL,
-             quantidade 				NUMERIC(38) NOT NULL,
+             estoque_id 			NUMERIC(38) NOT NULL,
+             loja_id 				NUMERIC(38) NOT NULL,
+             produto_id 			NUMERIC(38) NOT NULL,
+             quantidade 			NUMERIC(38) NOT NULL,
                 
                 CONSTRAINT pk_estoques PRIMARY KEY (estoque_id)
                 
@@ -113,12 +120,12 @@ COMMENT ON COLUMN estoques.quantidade IS 'quantidade de determiando produto no e
 
 CREATE TABLE clientes (
 
-             cliente_id 		NUMERIC(38) 	 NOT NULL,
+             cliente_id 			NUMERIC(38) 	 NOT NULL,
              nome 				VARCHAR(255)	 NOT NULL,
              email 				VARCHAR(255) 	 NOT NULL,
-             telefone1 			VARCHAR(20),
-             telefone2 			VARCHAR(20),
-             telefone3 			VARCHAR(20),
+             telefone1 				VARCHAR(20),
+             telefone2 				VARCHAR(20),
+             telefone3 				VARCHAR(20),
 
 
                 CONSTRAINT pk_clientes PRIMARY KEY (cliente_id)
@@ -135,11 +142,11 @@ COMMENT ON COLUMN clientes.telefone3 IS 'Terceiro telefone de contato do cliente
 --COMANDO DE CRIAÇÃO DA TABELA PEDIDOS
 CREATE TABLE pedidos (
 
-             pedido_id 		NUMERIC(38) 	NOT NULL,
-             data_hora 		TIMESTAMP 		NOT NULL,
-             cliente_id 	NUMERIC(38) 	NOT NULL,
-             status			VARCHAR(15) 	NOT NULL,
-             loja_id 		NUMERIC(38) 	NOT NULL,
+             pedido_id 			  NUMERIC(38) 	NOT NULL,
+             data_hora 			  TIMESTAMP 	NOT NULL,
+             cliente_id 		  NUMERIC(38) 	NOT NULL,
+             status			  VARCHAR(15) 	NOT NULL,
+             loja_id 			  NUMERIC(38) 	NOT NULL,
 
                 CONSTRAINT pk_pedidos PRIMARY KEY (pedido_id)
 );
@@ -153,11 +160,11 @@ COMMENT ON COLUMN pedidos.loja_id IS 'Número único de identificação da loja 
 
 --COMANDO DE CRIAÇÃO DA TABELA ENVIOS
 CREATE TABLE envios (
-             envio_id 				NUMERIC(38)  NOT NULL,
-             cliente_id 			NUMERIC(38)  NOT NULL,
-             loja_id 				NUMERIC(38)  NOT NULL,
-             endereco_entrega 		VARCHAR(512) NOT NULL,
-             status 				VARCHAR(15)  NOT NULL,
+             envio_id 			  NUMERIC(38)  NOT NULL,
+             cliente_id 		  NUMERIC(38)  NOT NULL,
+             loja_id 			  NUMERIC(38)  NOT NULL,
+             endereco_entrega 		  VARCHAR(512) NOT NULL,
+             status 			  VARCHAR(15)  NOT NULL,
                 
                 CONSTRAINT pk_envios PRIMARY KEY (envio_id)
 --COMENTARIOS DAS COLUNAS DA TABELA ENVIOS
@@ -172,11 +179,11 @@ COMMENT ON COLUMN envios.status IS 'Mostra o status atual do envio';
 --COMANDO DE CRIÇÃO DA TABELA PEDIDOS_ITENS
 CREATE TABLE pedidos_itens (
 
-             pedido_id 			NUMERIC(38)		NOT NULL,
-             produto_id 			NUMERIC(38) 	NOT NULL,
-             numero_da_linha 	NUMERIC(38) 	NOT NULL,
+             pedido_id 			NUMERIC(38)	NOT NULL,
+             produto_id 		NUMERIC(38) 	NOT NULL,
+             numero_da_linha 		NUMERIC(38) 	NOT NULL,
              preco_unitario 		NUMERIC(10,2)   NOT NULL,
-             quantidade 			NUMERIC(38) 	NOT NULL,
+             quantidade 		NUMERIC(38) 	NOT NULL,
              envio_id 			NUMERIC(38) 	NOT NULL,
 
                 CONSTRAINT pk_pedidos_itens PRIMARY KEY (pedido_id, produto_id)
@@ -288,6 +295,9 @@ CHECK (quantidade >= 0);
 ALTER TABLE pedidos_itens ADD CONSTRAINT check_quantidade_pedidos_itens
 CHECK (quantidade >= 0);
 
+-- CONSTRAINT DE FORMATO DE EMAIL
+ALTER TABLE clientes ADD CONSTRAINT check_email_clientes
+CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
 
 
 
