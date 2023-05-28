@@ -3,7 +3,7 @@
 ## PROFESSOR: Abrantes Araújo Silva Filho
 
 ### Guia do repositório
-Este repositório está organizado em 2 princiapais partes dentro do diretório PSET1: 
+Este repositório está organizado em 2 principais partes dentro do diretório PSET1: 
 * Um subdiretório chamado Scripts com os scripts globais das linguagens PostgreSQL e MariaDB.
 * Um outro subdiretório chamado Architect com os arquivos no formato .architect e pdf do diagrama do banco de dados
 
