@@ -29,7 +29,7 @@ CREATE DATABASE uvv WITH
 \c 'dbname=uvv user=pedromello password=senha'	
           
 --COMANDO QUE CRIA O SCHEMA LOJAS 
-CREATE SCHEMA Lojas
+CREATE SCHEMA lojas
 AUTHORIZATION pedromello;
 
 --COMANDO QUE DEFINE O SCHEMA PADRÁO PARA O USUÁRIO
