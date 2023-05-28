@@ -297,7 +297,7 @@ CHECK (quantidade >= 0);
 
 -- CONSTRAINT DE FORMATO DE EMAIL
 ALTER TABLE clientes ADD CONSTRAINT check_email_clientes
-CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$')
+CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 
 
