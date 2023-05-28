@@ -1,7 +1,6 @@
 # DESIGN E DESENVOLVIMENTO DE BANCO DE DADOS PSET 1 
-
-> ALUNO: Pedro Henrique Pimentel Mello de Almeida
-> PROFESSOR: Abrantes Araújo Silva Filho
+ALUNO: Pedro Henrique Pimentel Mello de Almeida
+PROFESSOR: Abrantes Araújo Silva Filho
 
 ### Ajustes 
 
