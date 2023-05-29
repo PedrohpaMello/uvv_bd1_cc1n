@@ -54,7 +54,6 @@ CREATE TABLE produtos (
 );
 
 
-
 -- COMENTÁRIOS DAS COLUNAS DA TABELA PRODUTOS
 COMMENT ON TABLE produtos IS 'tabela com informações sobre os produtos';
 COMMENT ON COLUMN produtos.produto_id IS 'código único que identifica o produto (primary key da tabela produtos)';
@@ -167,6 +166,7 @@ CREATE TABLE envios (
              status 			  VARCHAR(15)  NOT NULL,
                 
                 CONSTRAINT pk_envios PRIMARY KEY (envio_id)
+	
 --COMENTARIOS DAS COLUNAS DA TABELA ENVIOS
 );
 COMMENT ON TABLE envios IS 'Tabela com informações referentes aos envios';
@@ -186,7 +186,7 @@ CREATE TABLE pedidos_itens (
              quantidade 		NUMERIC(38) 	NOT NULL,
              envio_id 			NUMERIC(38) 	NOT NULL,
 
-                CONSTRAINT pk_pedidos_itens PRIMARY KEY (pedido_id, produto_id)
+            CONSTRAINT pk_pedidos_itens PRIMARY KEY (pedido_id, produto_id)
 );
 --COMENTÁRIOS DA TABELA 
 COMMENT ON TABLE pedidos_itens IS ' tabela com as informações de pedidos dos produtos ';
