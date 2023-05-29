@@ -1,7 +1,3 @@
--- PSET1
--- ALUNO: PEDRO HENRIQUE PIMENTEL MELLO DE ALMEIDA
--- MATRÍCULA: 202305632
-
 -- COMANDO PARA REMOVER O BANCO DE DADOS SE ELE JÁ EXISTIR
 DROP DATABASE IF EXISTS uvv;
 
@@ -26,239 +22,212 @@ CREATE SCHEMA lojas;
 -- COMANDO QUE DEFINE O SCHEMA PADRÃO PARA O USUÁRIO
 ALTER USER 'pedromello'@'localhost' DEFAULT SCHEMA lojas;
 
-          
 
--- COMANDO PARA CRIAÇÃO DA TABELA PRODUTOS
+--COMANDO QUE CRIA A TABELA PRODUTOS
 CREATE TABLE produtos (
-
-  	     produto_id				NUMERIC(38)	NOT NULL,
-  	     nome				VARCHAR(255)	NOT NULL,
-  	     preco_unitario			NUMERIC(10,2),
-  	     detalhes				BYTEA,
-  	     imagem				BYTEA,
-             imagem_mime_type			VARCHAR(512),
-  	     imagem_arquivo			VARCHAR(512),
-  	     imagem_charset			VARCHAR(512),
-  	     imagem_ultima_atualizacao		DATE,
-  					
-  	         CONSTRAINT pk_produtos PRIMARY KEY (produto_id)
+                produto_id                        NUMERIC(38)         NOT NULL,
+                nome                              VARCHAR(255)        NOT NULL,
+                preco_unitario                    NUMERIC(10,2),
+                detalhes                          LONGBLOB,
+                imagem                            LONGBLOB,
+                imagem_mime_type                  VARCHAR(512),
+                imagem_arquivo                    VARCHAR(512),
+                imagem_charset                    VARCHAR(512),
+                imagem_ultima_atualizacao         DATE,
+          
+                           PRIMARY KEY (produto_id)
 );
+--COMANDOS DE COMENTÁRIO DA TABELA PRODUTOS
+ALTER TABLE produtos COMMENT 'tabela com informações sobre os produtos';
+ALTER TABLE produtos MODIFY COLUMN produto_id NUMERIC(38) COMMENT 'código único que identifica o produto e primary key da tabela produtos';
+ALTER TABLE produtos MODIFY COLUMN nome VARCHAR(255) COMMENT 'nome do produto';
+ALTER TABLE produtos MODIFY COLUMN preco_unitario NUMERIC(10, 2) COMMENT 'preco unitário do produto';
+ALTER TABLE produtos MODIFY COLUMN detalhes BLOB COMMENT 'detalhes do produto';
+ALTER TABLE produtos MODIFY COLUMN imagem BLOB COMMENT 'imagem do produto';
+ALTER TABLE produtos MODIFY COLUMN imagem_mime_type VARCHAR(512) COMMENT 'tipo de imagem do produto';
+ALTER TABLE produtos MODIFY COLUMN imagem_arquivo VARCHAR(512) COMMENT 'caminho do arquivo da imagem do produto';
+ALTER TABLE produtos MODIFY COLUMN imagem_charset VARCHAR(512) COMMENT 'conjunto de caracteres utilizado para compor a imagem';
+ALTER TABLE produtos MODIFY COLUMN imagem_ultima_atualizacao DATE COMMENT 'data da última atualização da imagem';
 
-
-
--- COMENTÁRIOS DAS COLUNAS DA TABELA PRODUTOS
-COMMENT ON TABLE produtos IS 'tabela com informações sobre os produtos';
-COMMENT ON COLUMN produtos.produto_id IS 'código único que identifica o produto (primary key da tabela produtos)';
-COMMENT ON COLUMN produtos.nome IS 'nome do produto';
-COMMENT ON COLUMN produtos.preco_unitario IS 'preco unitário do produto';
-COMMENT ON COLUMN produtos.detalhes IS 'detalhes do produto';
-COMMENT ON COLUMN produtos.imagem IS 'imagem do produto';
-COMMENT ON COLUMN produtos.imagem_mime_type IS 'tipo de imagem do produto';
-COMMENT ON COLUMN produtos.imagem_arquivo IS 'caminho do arquivo da imagem do produto';
-COMMENT ON COLUMN produtos.imagem_charset IS 'conjunto de caracteres utilizado para compor a imagem';
-COMMENT ON COLUMN produtos.imagem_ultima_atualizacao IS 'data da última atualização da imagem';
-
--- COMANDO PARA A CRIAÇÃO DA TABELA LOJAS
+--COMANDO QUE CRIA A TABELA LOJAS
 CREATE TABLE Lojas (
-
-             loja_id      			NUMERIC(38) 	NOT NULL,
-             nome 	     			VARCHAR(255) 	NOT NULL,
-             endereco_web 			VARCHAR(100),
-             endereco_fisico 			VARCHAR(512),
-             latitude 				NUMERIC,
-             longitude 				NUMERIC,
-             logo 				BYTEA,
-             logo_mime_type  			VARCHAR(512),
-             logo_arquivo   			VARCHAR,
-             logo_charset    			VARCHAR(512),
-             logo_ultima_atualizacao 		DATE,
-
-                CONSTRAINT pk_lojas PRIMARY KEY (loja_id)
+                loja_id                            NUMERIC(38)        NOT NULL,
+                nome                               VARCHAR(255)       NOT NULL,
+                endereco_web                       VARCHAR(100),
+                endereco_fisico                    VARCHAR(512),
+                latitude                           NUMERIC,
+                longitude                          NUMERIC,
+                logo                               LONGBLOB,
+                logo_mime_type                     VARCHAR(512),
+                logo_arquivo                       VARCHAR(512),
+                logo_charset                       VARCHAR(512),
+                logo_ultima_atualizacao            DATE,
+          
+                              PRIMARY KEY (loja_id)
 );
 
--- COMENTÁRIOS DAS COLUNAS DA TABELA LOJAS
-COMMENT ON TABLE Lojas IS 'Tabela com as informações referentes as lojas ';
-COMMENT ON COLUMN Lojas.loja_id IS 'Código único de identificação da loja';
-COMMENT ON COLUMN Lojas.nome IS 'Nome da loja';
-COMMENT ON COLUMN Lojas.endereco_web IS 'Endereço web da loja';
-COMMENT ON COLUMN Lojas.endereco_fisico IS 'Endereço físico da loja';
-COMMENT ON COLUMN Lojas.latitude IS 'latitude referente as cordenas da loja';
-COMMENT ON COLUMN Lojas.longitude IS 'Latitude referente as cordenadas da loja';
-COMMENT ON COLUMN Lojas.logo IS 'Arquivo de imagem do logo da loja';
-COMMENT ON COLUMN Lojas.logo_mime_type IS 'Identifica o tipo de arquivo da logo';
-COMMENT ON COLUMN Lojas.logo_arquivo IS 'Caminho para o arquivo da logo da loja';
-COMMENT ON COLUMN Lojas.logo_charset IS 'conjunto de caracteres utilizados na logo';
-COMMENT ON COLUMN Lojas.logo_ultima_atualizacao IS 'data da última atualização da logo';
+--COMENTÁRIOS DA TABELA LOJAS
+ALTER TABLE Lojas COMMENT 'Tabela com as informações referentes as lojas';
+ALTER TABLE Lojas MODIFY COLUMN loja_id NUMERIC(38) COMMENT 'Código único de identificação da loja';
+ALTER TABLE Lojas MODIFY COLUMN nome VARCHAR(255) COMMENT 'Nome da loja';
+ALTER TABLE Lojas MODIFY COLUMN endereco_web VARCHAR(100) COMMENT 'Endereço web da loja';
+ALTER TABLE Lojas MODIFY COLUMN endereco_fisico VARCHAR(512) COMMENT 'Endereço físico da loja';
+ALTER TABLE Lojas MODIFY COLUMN latitude NUMERIC COMMENT 'latitude referente as cordenas da loja';
+ALTER TABLE Lojas MODIFY COLUMN longitude NUMERIC COMMENT 'Latitude referente as cordenadas da loja';
+ALTER TABLE Lojas MODIFY COLUMN logo BLOB COMMENT 'Arquivo de imagem do logo da loja';
+ALTER TABLE Lojas MODIFY COLUMN logo_mime_type VARCHAR(512) COMMENT 'Identifica o tipo de arquivo da logo';
+ALTER TABLE Lojas MODIFY COLUMN logo_arquivo VARCHAR(512) COMMENT 'Caminho para o arquivo da logo da loja';
+ALTER TABLE Lojas MODIFY COLUMN logo_charset VARCHAR(512) COMMENT 'conjunto de caracteres utilizados na logo';
+ALTER TABLE Lojas MODIFY COLUMN logo_ultima_atualizacao DATE COMMENT 'data da última atualização da logo';
 
--- COMANDO DE CRIAÇÃO DA TABELA ESTOQUES
+--COMANDOS QUE CRIA A TABELA ESTOQUES
 CREATE TABLE estoques (
-             estoque_id 			NUMERIC(38) NOT NULL,
-             loja_id 				NUMERIC(38) NOT NULL,
-             produto_id 			NUMERIC(38) NOT NULL,
-             quantidade 			NUMERIC(38) NOT NULL,
-                
-                CONSTRAINT pk_estoques PRIMARY KEY (estoque_id)
-                
+                estoque_id                        NUMERIC(38)         NOT NULL,
+                loja_id                           NUMERIC(38)         NOT NULL,
+                produto_id                        NUMERIC(38)         NOT NULL,
+                quantidade                        NUMERIC(38)         NOT NULL,
+          
+                              PRIMARY KEY (estoque_id)
+);
+
 --COMENTARIOS DA TABELA ESTOQUES
-);
-COMMENT ON TABLE estoques IS 'tabela com informações referentes ao estoque dos produtos';
-COMMENT ON COLUMN estoques.estoque_id IS 'código único de identificação do estoque';
-COMMENT ON COLUMN estoques.loja_id IS 'Número único de identificação da loja na qual se localiza o estoque(foreign key vinda da tabela lojas)';
-COMMENT ON COLUMN estoques.produto_id IS 'código único de identificação de produto (foreign key vinda da tabela produtos)';
-COMMENT ON COLUMN estoques.quantidade IS 'quantidade de determiando produto no estoque';
+ALTER TABLE estoques COMMENT 'tabela com informações referentes ao estoque dos produtos';
+ALTER TABLE estoques MODIFY COLUMN estoque_id NUMERIC(38) COMMENT 'código único de identificação do estoque';
+ALTER TABLE estoques MODIFY COLUMN loja_id NUMERIC(38) COMMENT 'Número único de identificação da loja na qual se localiza o estoque e foreign key vinda da tabela lojas';
+ALTER TABLE estoques MODIFY COLUMN produto_id NUMERIC(38) COMMENT 'código único de identificação de produto e foreign key vinda da tabela produtos';
+ALTER TABLE estoques MODIFY COLUMN quantidade NUMERIC(38) COMMENT 'quantidade de determiando produto no estoque';
 
---COMANDO DE CRIAÇÃO DA TABELA CLIENTES
-
+-- COMANDO QUE CRIA A TABELA CLIENTES
 CREATE TABLE clientes (
-
-             cliente_id 			NUMERIC(38) 	 NOT NULL,
-             nome 				VARCHAR(255)	 NOT NULL,
-             email 				VARCHAR(255) 	 NOT NULL,
-             telefone1 				VARCHAR(20),
-             telefone2 				VARCHAR(20),
-             telefone3 				VARCHAR(20),
-
-
-                CONSTRAINT pk_clientes PRIMARY KEY (cliente_id)
+                cliente_id                        NUMERIC(38)         NOT NULL,
+                nome                              VARCHAR(255)        NOT NULL,
+                email                             VARCHAR(255)        NOT NULL,
+                telefone1                         VARCHAR(20),
+                telefone2                         VARCHAR(20),
+                telefone3                         VARCHAR(20),
+          
+                              PRIMARY KEY (cliente_id)
 );
--- COMENTÁRIOS DA TABELA CLIENTES
-COMMENT ON TABLE clientes IS 'tabela com as informações dos clientes ';
-COMMENT ON COLUMN clientes.cliente_id IS 'Código único que identifica cada cliente (Primary Key da tabela clientes)';
-COMMENT ON COLUMN clientes.nome IS 'Nome do cliente';
-COMMENT ON COLUMN clientes.email IS 'Email de contato dos clientes';
-COMMENT ON COLUMN clientes.telefone1 IS 'Telefone de contato do cliente';
-COMMENT ON COLUMN clientes.telefone2 IS 'Segundo telefone de contato do cliente';
-COMMENT ON COLUMN clientes.telefone3 IS 'Terceiro telefone de contato do cliente';
+--COMENTARIOS DA TABELA CLIENTES
+ALTER TABLE clientes COMMENT 'tabela com as informações dos clientes';
+ALTER TABLE clientes MODIFY COLUMN cliente_id NUMERIC(38) COMMENT 'Código único que identifica cada cliente e Primary Key da tabela clientes';
+ALTER TABLE clientes MODIFY COLUMN nome VARCHAR(255) COMMENT 'Nome do cliente';
+ALTER TABLE clientes MODIFY COLUMN email VARCHAR(255) COMMENT 'Email de contato dos clientes';
+ALTER TABLE clientes MODIFY COLUMN telefone1 VARCHAR(20) COMMENT 'Telefone de contato do cliente';
+ALTER TABLE clientes MODIFY COLUMN telefone2 VARCHAR(20) COMMENT 'Segundo telefone de contato do cliente';
+ALTER TABLE clientes MODIFY COLUMN telefone3 VARCHAR(20) COMMENT 'Terceiro telefone de contato do cliente';
 
---COMANDO DE CRIAÇÃO DA TABELA PEDIDOS
+--COMANDO QUE CRIA A TABELA PEDIDOS
 CREATE TABLE pedidos (
-
-             pedido_id 			  NUMERIC(38) 	NOT NULL,
-             data_hora 			  TIMESTAMP 	NOT NULL,
-             cliente_id 		  NUMERIC(38) 	NOT NULL,
-             status			  VARCHAR(15) 	NOT NULL,
-             loja_id 			  NUMERIC(38) 	NOT NULL,
-
-                CONSTRAINT pk_pedidos PRIMARY KEY (pedido_id)
+                pedido_id                         NUMERIC(38)         NOT NULL,
+                data_hora                         DATETIME            NOT NULL,
+                cliente_id                        NUMERIC(38)         NOT NULL,
+                status                            VARCHAR(15)         NOT NULL,
+                loja_id                           NUMERIC(38)         NOT NULL,
+          
+                              PRIMARY KEY (pedido_id)
 );
---COMENTÁRIOS DAS COLUNAS DA TABELA PEDIDOS
-COMMENT ON TABLE pedidos IS 'tabela com as informaçóes referentes aos pedidos';
-COMMENT ON COLUMN pedidos.pedido_id IS 'Código único de identificação do pedido (Primary Key da tabela pedidos)';
-COMMENT ON COLUMN pedidos.data_hora IS 'Hora na qual o pedido foi realizado';
-COMMENT ON COLUMN pedidos.cliente_id IS 'Código único que identifica cada cliente (foreign key vinda da tabela clientes)';
-COMMENT ON COLUMN pedidos.status IS 'Mostra o status atual do pedido';
-COMMENT ON COLUMN pedidos.loja_id IS 'Número único de identificação da loja na qual foi realizado o pedido (foreign key vinda da tabela lojas)';
+-- COMENTARIOS DA TABELA PEDIDOS
+ALTER TABLE pedidos COMMENT 'tabela com as informaçóes referentes aos pedidos';
+ALTER TABLE pedidos MODIFY COLUMN pedido_id NUMERIC(38) COMMENT 'Código único de identificação do pedido e Primary Key da tabela pedidos';
+ALTER TABLE pedidos MODIFY COLUMN data_hora TIMESTAMP COMMENT 'Hora na qual o pedido foi realizado';
+ALTER TABLE pedidos MODIFY COLUMN cliente_id NUMERIC(38) COMMENT 'Código único que identifica cada cliente e foreign key vinda da tabela clientes ';
+ALTER TABLE pedidos MODIFY COLUMN status VARCHAR(15) COMMENT 'Mostra o status atual do pedido';
+ALTER TABLE pedidos MODIFY COLUMN loja_id NUMERIC(38) COMMENT 'Número único de identificação da loja na qual foi realizado o pedido e foreign key vinda da tabela lojas ';
 
---COMANDO DE CRIAÇÃO DA TABELA ENVIOS
+--COMANDO QUE CRIA A TABELA ENVIOS
 CREATE TABLE envios (
-             envio_id 			  NUMERIC(38)  NOT NULL,
-             cliente_id 		  NUMERIC(38)  NOT NULL,
-             loja_id 			  NUMERIC(38)  NOT NULL,
-             endereco_entrega 		  VARCHAR(512) NOT NULL,
-             status 			  VARCHAR(15)  NOT NULL,
-                
-                CONSTRAINT pk_envios PRIMARY KEY (envio_id)
---COMENTARIOS DAS COLUNAS DA TABELA ENVIOS
+                envio_id                          NUMERIC(38)          NOT NULL,
+                cliente_id                        NUMERIC(38)          NOT NULL,
+                loja_id                           NUMERIC(38)          NOT NULL,
+                endereco_entrega                  VARCHAR(512)         NOT NULL,
+                status                            VARCHAR(15)          NOT NULL,
+          
+                              PRIMARY KEY (envio_id)
 );
-COMMENT ON TABLE envios IS 'Tabela com informações referentes aos envios';
-COMMENT ON COLUMN envios.envio_id IS 'Código único de identificação do envio (Primary Key da tabela envios)';
-COMMENT ON COLUMN envios.cliente_id IS 'Código único que identifica cada cliente (foreign key vinda da tabela clientes)';
-COMMENT ON COLUMN envios.loja_id IS 'Número único de identificação da loja na qual foi realizado o pedido (foreign key vinda da tabela lojas)';
-COMMENT ON COLUMN envios.endereco_entrega IS 'Endereço no qual será entregue os envios';
-COMMENT ON COLUMN envios.status IS 'Mostra o status atual do envio';
+--COMENTÁRIOS DA TABELA ENVIOS
+ALTER TABLE envios COMMENT 'Tabela com informações referentes aos envios';
+ALTER TABLE envios MODIFY COLUMN envio_id NUMERIC(38) COMMENT 'Código único de identificação do envio e Primary Key da tabela envios';
+ALTER TABLE envios MODIFY COLUMN cliente_id NUMERIC(38) COMMENT 'Código único que identifica cada cliente e foreign key vinda da tabela clientes';
+ALTER TABLE envios MODIFY COLUMN loja_id NUMERIC(38) COMMENT 'Número único de identificação da loja na qual foi realizado o pedido e foreign key vinda da tabela lojas';
+ALTER TABLE envios MODIFY COLUMN endereco_entrega VARCHAR(512) COMMENT 'Endereço no qual será entregue os envios';
+ALTER TABLE envios MODIFY COLUMN status VARCHAR(15) COMMENT 'Mostra o status atual do envio';
 
---COMANDO DE CRIÇÃO DA TABELA PEDIDOS_ITENS
+--COMANDO QUE CRIA A TABELA PEDIDOS_ITENS
 CREATE TABLE pedidos_itens (
-
-             pedido_id 			NUMERIC(38)	NOT NULL,
-             produto_id 		NUMERIC(38) 	NOT NULL,
-             numero_da_linha 		NUMERIC(38) 	NOT NULL,
-             preco_unitario 		NUMERIC(10,2)   NOT NULL,
-             quantidade 		NUMERIC(38) 	NOT NULL,
-             envio_id 			NUMERIC(38) 	NOT NULL,
-
-                CONSTRAINT pk_pedidos_itens PRIMARY KEY (pedido_id, produto_id)
+                pedido_id                       NUMERIC(38)   NOT NULL,
+                produto_id                      NUMERIC(38) NOT NULL,
+                numero_da_linha                 NUMERIC(38) NOT NULL,
+                preco_unitario                  NUMERIC(10,2) NOT NULL,
+                quantidade                      NUMERIC(38) NOT NULL,
+                envio_id                        NUMERIC(38) NOT NULL,
+          
+                          PRIMARY KEY (pedido_id, produto_id)
 );
---COMENTÁRIOS DA TABELA 
-COMMENT ON TABLE pedidos_itens IS ' tabela com as informações de pedidos dos produtos ';
-COMMENT ON COLUMN pedidos_itens.pedido_id IS 'código de identificação do pedido (foreign key vinda da tabela pedidos e primary key composta da tabela pedidos_itens)';
-COMMENT ON COLUMN pedidos_itens.produto_id IS 'código de identificação do produto (foreign key vinda da tabela produtos e primary key composta da tabela pedidos_itens)';
-COMMENT ON COLUMN pedidos_itens.numero_da_linha IS 'número da linha do produto';
-COMMENT ON COLUMN pedidos_itens.preco_unitario IS 'preço do produto por unidade';
-COMMENT ON COLUMN pedidos_itens.quantidade IS 'quantidade de produtos no pedido';
-COMMENT ON COLUMN pedidos_itens.envio_id IS 'código único que identifica o envio (foreign key da tabela envios)';
 
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS PRODUTOS E ESTOQUES
+--COMENTARIOS DA TABELA PEDIDOS_ITENS
+ALTER TABLE pedidos_itens COMMENT 'tabela com as informações de pedidos dos produtos';
+ALTER TABLE pedidos_itens MODIFY COLUMN pedido_id NUMERIC(38) COMMENT 'código de identificação do pedido e foreign key vinda da tabela pedidos e primary key composta da tabela pedidos_itens';
+ALTER TABLE pedidos_itens MODIFY COLUMN produto_id NUMERIC(38) COMMENT 'código de identificação do produto e foreign key vinda da tabela produtos e primary key composta da tabela pedidos_itens';
+ALTER TABLE pedidos_itens MODIFY COLUMN numero_da_linha NUMERIC(38) COMMENT 'número da linha do produto';
+ALTER TABLE pedidos_itens MODIFY COLUMN preco_unitario NUMERIC(10, 2) COMMENT 'preço do produto por unidade';
+ALTER TABLE pedidos_itens MODIFY COLUMN quantidade NUMERIC(38) COMMENT 'quantidade de produtos no pedido';
+ALTER TABLE pedidos_itens MODIFY COLUMN envio_id NUMERIC(38) COMMENT 'código único que identifica o envio e foreign key da tabela envios ';
+
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE PREODUTOS E ESTOQUES
 ALTER TABLE estoques ADD CONSTRAINT produtos_estoques_fk
 FOREIGN KEY (produto_id)
 REFERENCES produtos (produto_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS PRODUTOS E PEDIDOS_ITENS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE PRODUTOS E PEDIDOS_ITENS
 ALTER TABLE pedidos_itens ADD CONSTRAINT produtos_pedidos_itens_fk
 FOREIGN KEY (produto_id)
 REFERENCES produtos (produto_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
---CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS LOJAS E PEDIDOS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE LOJAS E PEDIDOS
 ALTER TABLE pedidos ADD CONSTRAINT lojas_pedidos_fk
 FOREIGN KEY (loja_id)
 REFERENCES Lojas (loja_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
---CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS LOJAS E ENVIOS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE LOJAS E ENVIOS
 ALTER TABLE envios ADD CONSTRAINT lojas_envios_fk
 FOREIGN KEY (loja_id)
 REFERENCES Lojas (loja_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS LOJAS E ESTOQUES
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE LOJAS E ESTOQUES
 ALTER TABLE estoques ADD CONSTRAINT lojas_estoques_fk
 FOREIGN KEY (loja_id)
 REFERENCES Lojas (loja_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS CLIENTES E ENVIOS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE CLIENTES E ENVIOS
 ALTER TABLE envios ADD CONSTRAINT clientes_envios_fk
 FOREIGN KEY (cliente_id)
 REFERENCES clientes (cliente_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS CLIENTES E PEDIDOS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE CLIENTES E PEDIDOS
 ALTER TABLE pedidos ADD CONSTRAINT clientes_pedidos_fk
 FOREIGN KEY (cliente_id)
 REFERENCES clientes (cliente_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS PEDIDOS E PEDIDOS_ITENS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE PEDIDOS E PEDIDOS_ITENS
 ALTER TABLE pedidos_itens ADD CONSTRAINT pedidos_pedidos_itens_fk
 FOREIGN KEY (pedido_id)
 REFERENCES pedidos (pedido_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
--- CONSTRAINT QUE DEFINE A FOREIGN KEY ENTRE AS TABELAS ENVIOS E PEDIDOS_ITENS
+ON UPDATE NO ACTION;
+--COMANDO QUE CRIA RELACIONAMENTO ENTRE ENVIOS E PEDIDOS_ITENS
 ALTER TABLE pedidos_itens ADD CONSTRAINT envios_pedidos_itens_fk
 FOREIGN KEY (envio_id)
 REFERENCES envios (envio_id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
+ON UPDATE NO ACTION;
 
 -- CONSTRAINTS DE CHECAGEM PREÇO UNITARIO POSITIVO
 ALTER TABLE produtos ADD CONSTRAINT check_preco_unitario_produtos
