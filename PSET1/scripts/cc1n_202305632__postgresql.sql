@@ -78,7 +78,7 @@ CREATE TABLE Lojas (
              longitude 				NUMERIC,
              logo 				BYTEA,
              logo_mime_type  			VARCHAR(512),
-             logo_arquivo   			VARCHAR,
+             logo_arquivo   			VARCHAR,(512)
              logo_charset    			VARCHAR(512),
              logo_ultima_atualizacao 		DATE,
 
