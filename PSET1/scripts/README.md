@@ -1,7 +1,6 @@
 # Scripts 
 
-Este subdiretório contém 2 arquivos, ambos são scripts globais para a criação do banco de dados das "Lojas UVV" o primeiro arquivo está na linguagem admnistrativa do POSTGRESSQL e o segundo está na do MariaDB
- 
+Este subdiretório contém o arquivo de scripts para a criação do banco de dados das "Lojas UVV" no SGBD PostgreSQL
 
 
 
